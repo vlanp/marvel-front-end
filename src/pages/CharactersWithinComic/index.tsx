@@ -1,27 +1,28 @@
 import { useEffect, useState } from "react";
-import IComics, { isComics } from "../../interfaces/Comics";
-import { useNavigate } from "react-router-dom";
+import "./charactersWithinComic.scss";
+import ICharacters, { isCharacters } from "../../interfaces/Characters";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import EError from "../../enums/Error";
 import Loading from "../../components/Loading";
 import ErrorComp from "../../components/ErrorComp";
 import DisplayCard from "../../components/DisplayCard";
 
-const Comics = () => {
+const CharactersWithinComic = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [data, setData] = useState<IComics>();
+  const [data, setData] = useState<ICharacters>();
   const [errorMessage, setErrorMessage] = useState<string>("");
-
-  const navigate = useNavigate();
+  const { comicid } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = import.meta.env.VITE_BACK_END_URL + "/comics";
+        const url =
+          import.meta.env.VITE_BACK_END_URL + "/characters/" + comicid;
 
         const response = await axios.get(url);
 
-        if (!isComics(response.data)) {
+        if (!isCharacters(response.data)) {
           throw new Error("Réponse inatendue du BackEnd");
         }
 
@@ -35,27 +36,25 @@ const Comics = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [comicid]);
 
   return (
-    <main className="comics-page">
+    <main className="characters-within-comic-page">
       {isLoading ? (
         <Loading />
       ) : errorMessage ? (
         <ErrorComp error={errorMessage} />
       ) : (
-        <section className="comics-page-comics">
-          {data?.results.map((comic) => {
+        <section className="characters-within-comic-page-character">
+          {data?.results.map((character) => {
             return (
               <DisplayCard
-                key={comic._id}
-                picture={comic.thumbnail.path}
-                name={comic.title}
-                description={comic.description}
-                extension={comic.thumbnail.extension}
-                handleClick={() => {
-                  navigate("/characters/" + comic._id);
-                }}
+                key={character._id}
+                picture={character.thumbnail.path}
+                name={character.name}
+                description={character.description}
+                extension={character.thumbnail.extension}
+                handleClick={() => {}}
               />
             );
           })}
@@ -65,4 +64,4 @@ const Comics = () => {
   );
 };
 
-export default Comics;
+export default CharactersWithinComic;

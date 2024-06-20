@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Characters from "./pages/Characters";
 import ComicsWithCharacter from "./pages/ComicsWithCharacter";
 import Comics from "./pages/Comics";
+import CharactersWithinComic from "./pages/CharactersWithinComic";
 
 // Components
 import Header from "./components/Header";
@@ -30,6 +31,10 @@ function App() {
         <Route path="/characters" element={<Characters />} />
         <Route path="/comics" element={<Comics />} />
         <Route path="/comics/:characterid" element={<ComicsWithCharacter />} />
+        <Route
+          path="/characters/:comicid"
+          element={<CharactersWithinComic />}
+        />
       </Routes>
     </Router>
   );
