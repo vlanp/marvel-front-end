@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import "./comicsWithCharacter.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import IComicsWithCharacters, {
+import IComicsWithCharacter, {
   isComicsWithCharacter,
 } from "../../interfaces/ComicsWithCharacter";
 import EError from "../../enums/Error";
@@ -12,7 +12,7 @@ import DisplayCard from "../../components/DisplayCard";
 
 const ComicsWithCharacter = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [data, setData] = useState<IComicsWithCharacters>();
+  const [data, setData] = useState<IComicsWithCharacter>();
   const [errorMessage, setErrorMessage] = useState<string>("");
   const { characterid } = useParams();
 

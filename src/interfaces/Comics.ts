@@ -4,7 +4,7 @@ import IThumbnail from "./Thumbnail";
 interface IComics {
   count: number;
   limit: number;
-  results: Array<IComicResult>;
+  results: Array<IComicResult> | [];
 }
 
 interface IComicResult {
