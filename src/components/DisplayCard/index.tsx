@@ -7,22 +7,23 @@ const DisplayCard = ({
   extension,
   name,
   description,
+  handleClick,
 }: {
   picture: string;
   extension: string;
   name: string;
   description: string;
+  handleClick: (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
 }) => {
   const pictureUrl = createPictureUrl({
     url: picture,
     extension: extension,
     format: EPictureFormat.PortraitIncredible,
   });
-  console.log(pictureUrl);
 
   return (
     <article className="display-card-component">
-      <img src={pictureUrl} alt={name} />
+      <img src={pictureUrl} alt={name} onClick={handleClick} />
       <div className="display-card-component-name">
         <p>Name:</p>
         <p>{name}</p>

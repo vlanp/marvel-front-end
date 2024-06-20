@@ -12,7 +12,7 @@ const Header = () => {
         <Link to={"/characters"} className="react-router-link">
           <h2>Explorer les Personnages</h2>
         </Link>
-        <Link className="react-router-link">
+        <Link to={"/comics"} className="react-router-link">
           <h2>Explorer les Comics</h2>
         </Link>
       </nav>

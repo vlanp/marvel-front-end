@@ -1,28 +1,30 @@
-import "./characters.scss";
+import { useParams } from "react-router-dom";
+import "./comicsWithCharacter.scss";
 import { useEffect, useState } from "react";
-import ICharacters, { isCharacters } from "../../interfaces/Characters";
-import EError from "../../enums/Error";
 import axios from "axios";
+import IComicsWithCharacters, {
+  isComicsWithCharacter,
+} from "../../interfaces/ComicsWithCharacter";
+import EError from "../../enums/Error";
 import Loading from "../../components/Loading";
 import ErrorComp from "../../components/ErrorComp";
 import DisplayCard from "../../components/DisplayCard";
-import { useNavigate } from "react-router-dom";
 
-const Characters = () => {
+const ComicsWithCharacter = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [data, setData] = useState<ICharacters>();
+  const [data, setData] = useState<IComicsWithCharacters>();
   const [errorMessage, setErrorMessage] = useState<string>("");
-
-  const navigate = useNavigate();
+  const { characterid } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = import.meta.env.VITE_BACK_END_URL + "/characters";
+        const url =
+          import.meta.env.VITE_BACK_END_URL + "/comics/" + characterid;
 
         const response = await axios.get(url);
 
-        if (!isCharacters(response.data)) {
+        if (!isComicsWithCharacter(response.data)) {
           throw new Error("Réponse inatendue du BackEnd");
         }
 
@@ -36,27 +38,25 @@ const Characters = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [characterid]);
 
   return (
-    <main className="characters-page">
+    <main className="comics-with-character-page">
       {isLoading ? (
         <Loading />
       ) : errorMessage ? (
         <ErrorComp error={errorMessage} />
       ) : (
-        <section className="characters-page-characters">
-          {data?.results.map((character) => {
+        <section className="comics-with-character-page-comics">
+          {data?.comics.map((comic) => {
             return (
               <DisplayCard
-                key={character._id}
-                picture={character.thumbnail.path}
-                name={character.name}
-                description={character.description}
-                extension={character.thumbnail.extension}
-                handleClick={() => {
-                  navigate("/comics/" + character._id);
-                }}
+                key={comic._id}
+                picture={comic.thumbnail.path}
+                name={comic.title}
+                description={comic.description}
+                extension={comic.thumbnail.extension}
+                handleClick={() => {}}
               />
             );
           })}
@@ -66,4 +66,4 @@ const Characters = () => {
   );
 };
 
-export default Characters;
+export default ComicsWithCharacter;

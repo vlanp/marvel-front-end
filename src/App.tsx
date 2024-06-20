@@ -3,6 +3,8 @@ import "./App.scss";
 // Pages
 import Home from "./pages/Home";
 import Characters from "./pages/Characters";
+import ComicsWithCharacter from "./pages/ComicsWithCharacter";
+import Comics from "./pages/Comics";
 
 // Components
 import Header from "./components/Header";
@@ -26,6 +28,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/characters" element={<Characters />} />
+        <Route path="/comics" element={<Comics />} />
+        <Route path="/comics/:characterid" element={<ComicsWithCharacter />} />
       </Routes>
     </Router>
   );
