@@ -19,8 +19,9 @@ body {
 }
 
 .container {
-  min-width: 100rem;
+  max-width: 100rem;
   margin: 0 auto;
+  background-color: blue;
 }
 
 h2 {
@@ -30,6 +31,8 @@ h2 {
 
 .react-router-link {
   text-decoration: none;
+  padding: 0 0;
+  margin: 0 0;
 }
 
 // .error-message {

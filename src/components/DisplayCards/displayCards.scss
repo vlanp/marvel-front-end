@@ -1,0 +1,10 @@
+.display-cards-component {
+  .loading-component,
+  .errorcomp-component {
+    height: calc(100vh - 80px);
+  }
+  .display-cards-component-cards {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

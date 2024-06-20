@@ -34,7 +34,7 @@ const EFinalEndpoint: IFinalEndpoint = {
   CHARACTERS_WITHIN_COMIC: {
     endpoint: "/characters/",
     params: "comicid",
-    validFunction: isAboutAComic,
+    validFunction: isCharacters,
     linkTo: EEndpointName.COMICS_WITH_CHARACTER,
   },
 } as const;

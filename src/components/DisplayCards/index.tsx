@@ -44,6 +44,8 @@ const DisplayCards = <T extends IComics | ICharacters | IComicsWithCharacter>({
         const response = await axios.get(url);
 
         if (!finalEndpoint.validFunction(response.data)) {
+          console.log(response.data);
+
           throw new Error("Réponse inatendue du BackEnd");
         }
 
@@ -60,7 +62,7 @@ const DisplayCards = <T extends IComics | ICharacters | IComicsWithCharacter>({
   }, [params, finalEndpoint]);
 
   return (
-    <main className="display-cards-component">
+    <main className="display-cards-component container">
       {isLoading ? (
         <Loading />
       ) : errorMessage ? (
