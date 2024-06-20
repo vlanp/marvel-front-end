@@ -1,0 +1,28 @@
+.speaking-character-component {
+  position: relative;
+  p {
+    position: absolute;
+    width: 25rem;
+    height: 12rem;
+    top: -14rem;
+    left: 26rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    text-align: center;
+    z-index: 1;
+  }
+}
+
+.speaking-character-component-character {
+  height: 40rem;
+}
+
+.speaking-character-component-bubble {
+  position: absolute;
+  top: -17.5rem;
+  left: 20rem;
+  width: 35rem;
+  z-index: 1;
+}

@@ -1,4 +1,4 @@
-.loading {
+.loading-component {
   font-size: 3rem;
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   text-align: center;
   justify-content: center;
   height: 100%;
-  .loading-icon {
+  .loading-component-icon {
     animation: circle 4s linear infinite;
     width: fit-content;
   }

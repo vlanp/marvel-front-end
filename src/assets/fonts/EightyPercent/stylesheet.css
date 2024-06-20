@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Eighty Percent';
+    src: url('EightyPercent.eot');
+    src: url('EightyPercent.eot?#iefix') format('embedded-opentype'),
+        url('EightyPercent.woff2') format('woff2'),
+        url('EightyPercent.woff') format('woff'),
+        url('EightyPercent.ttf') format('truetype'),
+        url('EightyPercent.svg#EightyPercent') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Eighty Percent Outline';
+    src: url('EightyPercentOutline.eot');
+    src: url('EightyPercentOutline.eot?#iefix') format('embedded-opentype'),
+        url('EightyPercentOutline.woff2') format('woff2'),
+        url('EightyPercentOutline.woff') format('woff'),
+        url('EightyPercentOutline.ttf') format('truetype'),
+        url('EightyPercentOutline.svg#EightyPercentOutline') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+

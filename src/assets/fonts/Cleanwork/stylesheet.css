@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Cleanwork';
+    src: url('Cleanwork.eot');
+    src: url('Cleanwork.eot?#iefix') format('embedded-opentype'),
+        url('Cleanwork.woff2') format('woff2'),
+        url('Cleanwork.woff') format('woff'),
+        url('Cleanwork.ttf') format('truetype'),
+        url('Cleanwork.svg#Cleanwork') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

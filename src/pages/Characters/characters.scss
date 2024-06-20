@@ -1,6 +1,10 @@
 .characters-page {
-  .loading,
-  .error-message {
+  .loading-component,
+  .errorcomp-component {
     height: calc(100vh - 80px);
+  }
+  .characters-page-characters {
+    display: flex;
+    flex-wrap: wrap;
   }
 }

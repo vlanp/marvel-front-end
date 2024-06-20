@@ -1,10 +1,11 @@
 import "./characters.scss";
 import { useEffect, useState } from "react";
 import ICharacters, { isCharacters } from "../../interfaces/Characters";
-import IError from "../../interfaces/Error";
 import EError from "../../enums/Error";
 import axios from "axios";
 import Loading from "../../components/Loading";
+import ErrorComp from "../../components/ErrorComp";
+import DisplayCard from "../../components/DisplayCard";
 
 const Characters = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -15,19 +16,20 @@ const Characters = () => {
     const fetchData = async () => {
       try {
         const url = import.meta.env.VITE_BACK_END_URL + "/characters";
-        console.log(url);
 
         const response = await axios.get(url);
 
         if (!isCharacters(response.data)) {
-          throw {};
+          throw new Error("Réponse inatendue du BackEnd");
         }
 
         setData(response.data);
         setIsLoading(false);
       } catch (error: unknown) {
+        console.log(error);
         setIsLoading(false);
-        setErrorMessage((error as IError).message || EError.UNKNOWN);
+        // Aucune validation d'arguments obligatoires n'est effectuée en back-end. Pas de distinction d'erreur.
+        setErrorMessage(EError.UNKNOWN);
       }
     };
     fetchData();
@@ -38,9 +40,21 @@ const Characters = () => {
       {isLoading ? (
         <Loading />
       ) : errorMessage ? (
-        <p className="error-message">{errorMessage}</p>
+        <ErrorComp error={errorMessage} />
       ) : (
-        <></>
+        <section className="characters-page-characters">
+          {data?.results.map((character) => {
+            return (
+              <DisplayCard
+                key={character._id}
+                picture={character.thumbnail.path}
+                name={character.name}
+                description={character.description}
+                extension={character.thumbnail.extension}
+              />
+            );
+          })}
+        </section>
       )}
     </main>
   );

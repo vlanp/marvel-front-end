@@ -1,7 +1,7 @@
 // Import
-@import "./assets//fonts//kool-beans/stylesheet.css";
-// @import "./assets//fonts//langdon/stylesheet.css";
+// @import "./assets//fonts//Cleanwork/stylesheet.css";
 @import "./assets//fonts//failed/stylesheet.css";
+@import "./assets//fonts//EightyPercent/stylesheet.css";
 
 // General
 
@@ -15,7 +15,7 @@ html {
 
 body {
   font-size: 1.6rem;
-  font-family: "Kool Beans", sans-serif;
+  font-family: "Eighty Percent", sans-serif;
 }
 
 .container {
@@ -32,11 +32,11 @@ h2 {
   text-decoration: none;
 }
 
-.error-message {
-  color: orangered;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 4rem;
-  text-decoration: underline;
-}
+// .error-message {
+//   color: orangered;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   font-size: 4rem;
+//   text-decoration: underline;
+// }
