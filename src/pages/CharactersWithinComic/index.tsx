@@ -19,6 +19,7 @@ const CharactersWithinComic = () => {
       try {
         const url =
           import.meta.env.VITE_BACK_END_URL + "/characters/" + comicid;
+        console.log(url);
 
         const response = await axios.get(url);
 

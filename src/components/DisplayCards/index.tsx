@@ -4,7 +4,7 @@ import DisplayCard from "../DisplayCard";
 import ErrorComp from "../ErrorComp";
 import Loading from "../Loading";
 import { useNavigate, useParams } from "react-router-dom";
-import { TFinalEndpoint } from "../../enums/Endpoints";
+import EFinalEndpoint, { TFinalEndpoint } from "../../enums/Endpoints";
 import axios from "axios";
 import EError from "../../enums/Error";
 import ICharacters from "../../interfaces/Characters";
@@ -30,6 +30,8 @@ const DisplayCards = <T extends IComics | ICharacters | IComicsWithCharacter>({
   params = paramsKey ? params : undefined;
 
   const navigate = useNavigate();
+  const navigationFinalEndpoint = EFinalEndpoint[finalEndpoint.linkTo];
+  const navigationTarget = navigationFinalEndpoint.endpoint;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,7 +80,7 @@ const DisplayCards = <T extends IComics | ICharacters | IComicsWithCharacter>({
                     description={character.description}
                     extension={character.thumbnail.extension}
                     handleClick={() => {
-                      navigate("/comics/" + character._id);
+                      navigate(navigationTarget + character._id);
                     }}
                   />
                 );
