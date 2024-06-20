@@ -1,0 +1,26 @@
+header {
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  padding: 0 2rem;
+  align-items: center;
+  .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  img {
+    height: 60px;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  h2 {
+    color: white;
+    &:hover {
+      color: orangered;
+      transition: 0.2s;
+    }
+  }
+}

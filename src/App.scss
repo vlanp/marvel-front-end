@@ -1,3 +1,8 @@
+// Import
+@import "./assets//fonts//kool-beans/stylesheet.css";
+// @import "./assets//fonts//langdon/stylesheet.css";
+@import "./assets//fonts//failed/stylesheet.css";
+
 // General
 
 * {
@@ -6,4 +11,32 @@
 
 html {
   font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Kool Beans", sans-serif;
+}
+
+.container {
+  min-width: 100rem;
+  margin: 0 auto;
+}
+
+h2 {
+  font-family: "Failed", sans-serif;
+  font-size: 3rem;
+}
+
+.react-router-link {
+  text-decoration: none;
+}
+
+.error-message {
+  color: orangered;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  text-decoration: underline;
 }
