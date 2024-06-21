@@ -19,8 +19,10 @@ import {
   faSpinner,
   faMagnifyingGlass,
   faXmark,
+  faHeart,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faSpinner, faMagnifyingGlass, faXmark);
+import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
+library.add(faSpinner, faMagnifyingGlass, faXmark, faHeart, farHeart);
 
 function App() {
   return (

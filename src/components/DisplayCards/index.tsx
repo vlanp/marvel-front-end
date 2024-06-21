@@ -4,12 +4,13 @@ import DisplayCard from "../DisplayCard";
 import ErrorComp from "../ErrorComp";
 import Loading from "../Loading";
 import { useNavigate, useParams } from "react-router-dom";
-import EFinalEndpoint, { TFinalEndpoint } from "../../enums/Endpoints";
+import EFinalEndpoint, {
+  EEndpointName,
+  TFinalEndpoint,
+} from "../../enums/Endpoints";
 import axios, { AxiosResponse } from "axios";
 import EError from "../../enums/Error";
-import ICharacters, {
-  isICharactersWithDatas,
-} from "../../interfaces/Characters";
+import ICharacters from "../../interfaces/Characters";
 import IComics from "../../interfaces/Comics";
 import IComicsWithCharacter from "../../interfaces/ComicsWithCharacter";
 import IAboutACharacter from "../../interfaces/AboutACharacter";
@@ -33,7 +34,6 @@ const DisplayCards = <
     finalEndpoint.endpoint2 && finalEndpoint.endpoint2.params
       ? finalEndpoint.endpoint2.params
       : "";
-  console.log(finalEndpoint);
   let params = useParams()[paramsKey];
 
   // Gère le cas particulier où il y aurait une key "" dans le retour de useParams()
@@ -134,6 +134,12 @@ const DisplayCards = <
                 description={data2.description}
                 extension={data2.thumbnail.extension}
                 format={EPictureFormat.PortraitUncanny}
+                id={data2._id}
+                type={
+                  finalEndpoint.linkTo === EEndpointName.CHARACTERS_WITHIN_COMIC
+                    ? EEndpointName.CHARACTERS
+                    : EEndpointName.COMICS
+                }
                 handleClick={() => {}}
               />
             )}
@@ -152,6 +158,13 @@ const DisplayCards = <
                       description={character.description}
                       extension={character.thumbnail.extension}
                       format={EPictureFormat.PortraitIncredible}
+                      id={character._id}
+                      type={
+                        finalEndpoint.linkTo ===
+                        EEndpointName.COMICS_WITH_CHARACTER
+                          ? EEndpointName.CHARACTERS
+                          : EEndpointName.COMICS
+                      }
                       handleClick={() => {
                         navigate(navigationTarget + character._id);
                       }}

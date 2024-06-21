@@ -1,9 +1,17 @@
 .display-card-component-incredible,
 .display-card-component-uncanny {
+  position: relative;
   img {
     border-radius: 10px;
     &:hover {
       opacity: 0.8;
+      cursor: pointer;
+    }
+  }
+  .display-card-component-heart {
+    position: absolute;
+    z-index: 1;
+    &:hover {
       cursor: pointer;
     }
   }
@@ -43,6 +51,16 @@
       overflow-y: scroll;
     }
   }
+  .display-card-component-heart {
+    top: 2rem;
+    right: 2rem;
+    font-size: 4rem;
+    color: red;
+    &:hover {
+      font-size: 5rem;
+      transition: 0.5s;
+    }
+  }
 }
 
 .display-card-component-uncanny {
@@ -67,6 +85,16 @@
         font-size: 2.2rem;
         overflow: hidden;
       }
+    }
+  }
+  .display-card-component-heart {
+    top: 2rem;
+    left: 25rem;
+    font-size: 4rem;
+    color: red;
+    &:hover {
+      font-size: 5rem;
+      transition: 0.5s;
     }
   }
 }

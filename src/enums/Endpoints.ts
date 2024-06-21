@@ -89,3 +89,4 @@ type IFinalEndpoint = {
 
 export default EFinalEndpoint;
 export type { TFinalEndpoint };
+export { EEndpointName };
