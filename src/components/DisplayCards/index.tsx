@@ -7,7 +7,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import EFinalEndpoint, { TFinalEndpoint } from "../../enums/Endpoints";
 import axios, { AxiosResponse } from "axios";
 import EError from "../../enums/Error";
-import ICharacters from "../../interfaces/Characters";
+import ICharacters, {
+  isICharactersWithDatas,
+} from "../../interfaces/Characters";
 import IComics from "../../interfaces/Comics";
 import IComicsWithCharacter from "../../interfaces/ComicsWithCharacter";
 import IAboutACharacter from "../../interfaces/AboutACharacter";
@@ -76,15 +78,22 @@ const DisplayCards = <
 
         if (!finalEndpoint.endpoint1.isData(data1)) {
           console.log(data1);
-          throw new Error("Réponse inatendue du BackEnd");
+          throw new Error(
+            finalEndpoint.errorMessage +
+              (!data2
+                ? ""
+                : "name" in data2
+                ? " " + data2.name
+                : " " + data2.title)
+          );
         }
 
         if (
           finalEndpoint.endpoint2 &&
           (!data2 || !finalEndpoint.endpoint2.isData(data2))
         ) {
-          console.log(data1);
-          throw new Error("Réponse inatendue du BackEnd");
+          console.log(data2);
+          throw new Error(EError.UNKNOWN);
         }
 
         setData1(data1);
@@ -93,8 +102,9 @@ const DisplayCards = <
       } catch (error: unknown) {
         console.log(error);
         setIsLoading(false);
-        // Aucune validation d'arguments obligatoires n'est effectuée en back-end. Pas de distinction d'erreur.
-        setErrorMessage(EError.UNKNOWN);
+        error instanceof Error
+          ? setErrorMessage(error.message)
+          : setErrorMessage(EError.UNKNOWN);
       }
     };
     fetchData();

@@ -3,6 +3,7 @@ import { isIAboutAComicWithDatas } from "../interfaces/AboutAComic";
 import { isICharactersWithDatas } from "../interfaces/Characters";
 import { isIComicsWithDatas } from "../interfaces/Comics";
 import { isIComicsWithCharacterWithDatas } from "../interfaces/ComicsWithCharacter";
+import EError from "./Error";
 
 enum EEndpointName {
   CHARACTERS = "CHARACTERS",
@@ -15,6 +16,7 @@ const EFinalEndpoint: IFinalEndpoint = {
   /** Get a list of characters */
   CHARACTERS: {
     pageTitle: "Voici la liste de tous les personnages",
+    errorMessage: EError.UNKNOWN,
     endpoint1: {
       endpoint: "/characters/",
       isData: isICharactersWithDatas,
@@ -24,6 +26,7 @@ const EFinalEndpoint: IFinalEndpoint = {
   /** Get a list of comics */
   COMICS: {
     pageTitle: "Voici la liste de tous les comics",
+    errorMessage: EError.UNKNOWN,
     endpoint1: {
       endpoint: "/comics/",
       isData: isIComicsWithDatas,
@@ -33,7 +36,8 @@ const EFinalEndpoint: IFinalEndpoint = {
   /** Get a list of comics containing a specific character */
   COMICS_WITH_CHARACTER: {
     pageTitle:
-      "Voici la liste de tous les comics dans lesquels apparaissent le personnage",
+      "Voici la liste de tous les comics dans lesquels apparait le personnage",
+    errorMessage: "Il n'y a aucun comic associé au personnage",
     endpoint1: {
       endpoint: "/comics/",
       isData: isIComicsWithCharacterWithDatas,
@@ -48,6 +52,7 @@ const EFinalEndpoint: IFinalEndpoint = {
   /** Get a list of characters present in a specific comic */
   CHARACTERS_WITHIN_COMIC: {
     pageTitle: "Voici la liste de tous les personnages présents dans le comic",
+    errorMessage: "Il n'y a aucun personnage associé au comic",
     endpoint1: {
       endpoint: "/characters/",
       isData: isICharactersWithDatas,
@@ -66,6 +71,7 @@ type TFinalEndpoint = (typeof EFinalEndpoint)[keyof typeof EFinalEndpoint];
 type IFinalEndpoint = {
   [key in EEndpointName]: {
     pageTitle: string;
+    errorMessage: string;
     endpoint1: {
       endpoint: string;
       isData: (data: object) => boolean;
