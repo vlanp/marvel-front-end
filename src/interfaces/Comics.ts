@@ -17,11 +17,23 @@ interface IComicResult {
 
 interface IComicThumbnail extends IThumbnail {}
 
-const isComics = (value: unknown) => {
-  if ((value as IComics).count || (value as IComics).limit) return true;
+const isIComicsWithDatas = (value: object): value is IComics => {
+  if (
+    "count" in value &&
+    "limit" in value &&
+    "results" in value &&
+    Array.isArray(value.results) &&
+    value.results.length > 0 &&
+    "thumbnail" in value.results[0] &&
+    "_id" in value.results[0] &&
+    "title" in value.results[0] &&
+    "description" in value.results[0] &&
+    "__v" in value.results[0]
+  )
+    return true;
   else return false;
 };
 
 export default IComics;
 export type { IComicResult, IComicThumbnail };
-export { isComics };
+export { isIComicsWithDatas };

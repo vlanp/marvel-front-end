@@ -1,5 +1,5 @@
 // Import
-// @import "./assets//fonts//Cleanwork/stylesheet.css";
+@import "./assets//fonts//Cleanwork/stylesheet.css";
 @import "./assets//fonts//failed/stylesheet.css";
 @import "./assets//fonts//EightyPercent/stylesheet.css";
 
@@ -21,12 +21,21 @@ body {
 .container {
   max-width: 100rem;
   margin: 0 auto;
-  background-color: blue;
+  // background-color: blue;
 }
 
 h2 {
   font-family: "Failed", sans-serif;
   font-size: 3rem;
+}
+
+h3 {
+  font-family: "Cleanwork", sans-serif;
+  font-size: 3rem;
+  text-decoration: underline;
+  color: orangered;
+  text-align: center;
+  line-height: 4rem;
 }
 
 .react-router-link {

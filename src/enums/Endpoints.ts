@@ -1,7 +1,8 @@
-import { isAboutACharacter } from "../interfaces/AboutACharacter";
-import { isAboutAComic } from "../interfaces/AboutAComic";
-import { isCharacters } from "../interfaces/Characters";
-import { isComics } from "../interfaces/Comics";
+import { isIAboutACharacterWithDatas } from "../interfaces/AboutACharacter";
+import { isIAboutAComicWithDatas } from "../interfaces/AboutAComic";
+import { isICharactersWithDatas } from "../interfaces/Characters";
+import { isIComicsWithDatas } from "../interfaces/Comics";
+import { isIComicsWithCharacterWithDatas } from "../interfaces/ComicsWithCharacter";
 
 enum EEndpointName {
   CHARACTERS = "CHARACTERS",
@@ -13,28 +14,49 @@ enum EEndpointName {
 const EFinalEndpoint: IFinalEndpoint = {
   /** Get a list of characters */
   CHARACTERS: {
-    endpoint: "/characters/",
-    validFunction: isCharacters,
+    pageTitle: "Voici la liste de tous les personnages",
+    endpoint1: {
+      endpoint: "/characters/",
+      isData: isICharactersWithDatas,
+    },
     linkTo: EEndpointName.COMICS_WITH_CHARACTER,
   },
   /** Get a list of comics */
   COMICS: {
-    endpoint: "/comics/",
-    validFunction: isComics,
+    pageTitle: "Voici la liste de tous les comics",
+    endpoint1: {
+      endpoint: "/comics/",
+      isData: isIComicsWithDatas,
+    },
     linkTo: EEndpointName.CHARACTERS_WITHIN_COMIC,
   },
   /** Get a list of comics containing a specific character */
   COMICS_WITH_CHARACTER: {
-    endpoint: "/comics/",
-    params: "characterid",
-    validFunction: isAboutACharacter,
+    pageTitle:
+      "Voici la liste de tous les comics dans lesquels apparaissent le personnage",
+    endpoint1: {
+      endpoint: "/comics/",
+      isData: isIComicsWithCharacterWithDatas,
+    },
+    endpoint2: {
+      endpoint: "/character/",
+      params: "characterid",
+      isData: isIAboutACharacterWithDatas,
+    },
     linkTo: EEndpointName.CHARACTERS_WITHIN_COMIC,
   },
   /** Get a list of characters present in a specific comic */
   CHARACTERS_WITHIN_COMIC: {
-    endpoint: "/characters/",
-    params: "comicid",
-    validFunction: isCharacters,
+    pageTitle: "Voici la liste de tous les personnages présents dans le comic",
+    endpoint1: {
+      endpoint: "/characters/",
+      isData: isICharactersWithDatas,
+    },
+    endpoint2: {
+      endpoint: "/comic/",
+      params: "comicid",
+      isData: isIAboutAComicWithDatas,
+    },
     linkTo: EEndpointName.COMICS_WITH_CHARACTER,
   },
 } as const;
@@ -43,11 +65,18 @@ type TFinalEndpoint = (typeof EFinalEndpoint)[keyof typeof EFinalEndpoint];
 
 type IFinalEndpoint = {
   [key in EEndpointName]: {
-    endpoint: string;
-    params?: string;
-    query?: string;
-    body?: string;
-    validFunction: (data: unknown) => boolean;
+    pageTitle: string;
+    endpoint1: {
+      endpoint: string;
+      isData: (data: object) => boolean;
+    };
+    endpoint2?: {
+      endpoint: string;
+      params: string;
+      isData: (data: object) => boolean;
+    };
+    // query?: string;
+    // body?: string;
     linkTo: EEndpointName;
   };
 };

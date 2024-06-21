@@ -3,8 +3,21 @@
   .errorcomp-component {
     height: calc(100vh - 80px);
   }
+  .display-cards-component-card {
+    background-color: red;
+    display: flex;
+    justify-content: center;
+  }
   .display-cards-component-cards {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 2rem;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 3rem 0;
   }
 }

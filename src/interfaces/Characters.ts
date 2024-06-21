@@ -18,11 +18,24 @@ interface ICharacterResult {
 
 interface ICharacterThumbnail extends IThumbnail {}
 
-const isCharacters = (value: unknown) => {
-  if ((value as ICharacters).count || (value as ICharacters).limit) return true;
+const isICharactersWithDatas = (value: object): value is ICharacters => {
+  if (
+    "count" in value &&
+    "limit" in value &&
+    "results" in value &&
+    Array.isArray(value.results) &&
+    value.results.length > 0 &&
+    "thumbnail" in value.results[0] &&
+    "comics" in value.results[0] &&
+    "_id" in value.results[0] &&
+    "name" in value.results[0] &&
+    "description" in value.results[0] &&
+    "__v" in value.results[0]
+  )
+    return true;
   else return false;
 };
 
 export default ICharacters;
 export type { ICharacterResult, ICharacterThumbnail };
-export { isCharacters };
+export { isICharactersWithDatas };
