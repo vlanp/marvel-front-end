@@ -31,6 +31,9 @@ const Header = ({
         <Link to={"/comics"} className="react-router-link">
           <h2>Explorer les Comics</h2>
         </Link>
+        <Link to={"/favorites"} className="react-router-link">
+          <h2>Voir mes favoris</h2>
+        </Link>
       </nav>
       <div className="header-component-account">
         <img

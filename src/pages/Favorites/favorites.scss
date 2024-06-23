@@ -1,0 +1,23 @@
+.favorites-page {
+  padding: 4rem;
+  .loading-component,
+  .errorcomp-component {
+    height: calc(100vh - 80px);
+  }
+  > nav {
+    display: flex;
+    justify-content: space-between;
+    h3 {
+      text-decoration: none;
+      border: 2px solid orangered;
+      padding: 1rem;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+    }
+  }
+  .favorites-page-selected {
+    background-color: chartreuse;
+  }
+}

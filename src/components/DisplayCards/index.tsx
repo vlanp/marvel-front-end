@@ -24,8 +24,12 @@ const DisplayCards = <
   D extends IAboutACharacter | IAboutAComic
 >({
   finalEndpoint,
+  filterFavorites,
+  data,
 }: {
   finalEndpoint: TFinalEndpoint;
+  filterFavorites: boolean;
+  data?: IAboutACharacter[] | IAboutAComic[];
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data1, setData1] = useState<T>();
@@ -61,16 +65,12 @@ const DisplayCards = <
             ? "&" + finalEndpoint.endpoint1.specificQueryName + "=" + search
             : "");
 
-        console.log(url1);
-
         const url2 =
           finalEndpoint.endpoint2 &&
           params &&
           import.meta.env.VITE_BACK_END_URL +
             finalEndpoint.endpoint2.endpoint +
             params;
-
-        console.log(url2);
 
         const arrayOfPromises: [
           Promise<AxiosResponse<T>>,
@@ -120,8 +120,12 @@ const DisplayCards = <
           : setErrorMessage(EError.UNKNOWN);
       }
     };
-    fetchData();
-  }, [params, finalEndpoint, currentPage, search]);
+    if (!filterFavorites) {
+      fetchData();
+    } else {
+      setIsLoading(false);
+    }
+  }, [params, finalEndpoint, currentPage, search, filterFavorites]);
 
   return (
     <section className="display-cards-component">
@@ -157,28 +161,63 @@ const DisplayCards = <
               />
             )}
           </section>
-          <section className="display-cards-component-search-bar">
-            <SearchBar
-              search={search}
-              setSearch={setSearch}
-              placeholder={finalEndpoint.searchBarPlaceholder}
-            />
-          </section>
-          <section className="display-cards-component-cards">
-            {data1 &&
-              ("results" in data1 ? data1.results : data1.comics).map(
-                (character) => {
+          {!filterFavorites && (
+            <section className="display-cards-component-search-bar">
+              <SearchBar
+                search={search}
+                setSearch={setSearch}
+                placeholder={finalEndpoint.searchBarPlaceholder}
+              />
+            </section>
+          )}
+          {!filterFavorites && (
+            <section className="display-cards-component-cards">
+              {data1 &&
+                ("results" in data1 ? data1.results : data1.comics).map(
+                  (character) => {
+                    return (
+                      <DisplayCard
+                        key={character._id}
+                        picture={character.thumbnail.path}
+                        name={
+                          "name" in character ? character.name : character.title
+                        }
+                        description={character.description}
+                        extension={character.thumbnail.extension}
+                        format={EPictureFormat.PortraitIncredible}
+                        id={character._id}
+                        type={
+                          finalEndpoint.linkTo ===
+                          EEndpointName.COMICS_WITH_CHARACTER
+                            ? EEndpointName.CHARACTERS
+                            : EEndpointName.COMICS
+                        }
+                        handleClick={() => {
+                          navigate(navigationTarget + character._id);
+                        }}
+                      />
+                    );
+                  }
+                )}
+            </section>
+          )}
+          {filterFavorites && (
+            <section className="display-cards-component-cards">
+              {data &&
+                data.map((characterOrComic) => {
                   return (
                     <DisplayCard
-                      key={character._id}
-                      picture={character.thumbnail.path}
+                      key={characterOrComic._id}
+                      picture={characterOrComic.thumbnail.path}
                       name={
-                        "name" in character ? character.name : character.title
+                        "name" in characterOrComic
+                          ? characterOrComic.name
+                          : characterOrComic.title
                       }
-                      description={character.description}
-                      extension={character.thumbnail.extension}
+                      description={characterOrComic.description}
+                      extension={characterOrComic.thumbnail.extension}
                       format={EPictureFormat.PortraitIncredible}
-                      id={character._id}
+                      id={characterOrComic._id}
                       type={
                         finalEndpoint.linkTo ===
                         EEndpointName.COMICS_WITH_CHARACTER
@@ -186,13 +225,13 @@ const DisplayCards = <
                           : EEndpointName.COMICS
                       }
                       handleClick={() => {
-                        navigate(navigationTarget + character._id);
+                        navigate(navigationTarget + characterOrComic._id);
                       }}
                     />
                   );
-                }
-              )}
-          </section>
+                })}
+            </section>
+          )}
           {maxPage > 1 && (
             <PageHandling
               currentPage={currentPage}
