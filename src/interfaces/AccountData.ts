@@ -1,9 +1,13 @@
 interface AccountData {
-  username: string;
-  avatar?: string;
-  email: string;
+  account: {
+    username: string;
+    avatar?: {
+      secure_url: string;
+      public_id: string;
+    };
+    email: string;
+  };
   active: boolean;
-  newsletter: boolean;
 }
 
 export default AccountData;
