@@ -56,7 +56,7 @@ const DisplayCards = <
     const fetchData = async () => {
       try {
         const url1 =
-          import.meta.env.VITE_VINTED_API_URL +
+          import.meta.env.VITE_BACK_END_URL +
           finalEndpoint.endpoint1.endpoint +
           (params ? params : "") +
           "?skip=" +
@@ -66,12 +66,12 @@ const DisplayCards = <
             : "");
 
         console.log(url1);
-        console.log(import.meta.env.VITE_VINTED_API_URL);
+        console.log(import.meta.env.VITE_BACK_END_URL);
 
         const url2 =
           finalEndpoint.endpoint2 &&
           params &&
-          import.meta.env.VITE_VINTED_API_URL +
+          import.meta.env.VITE_BACK_END_URL +
             finalEndpoint.endpoint2.endpoint +
             params;
 
