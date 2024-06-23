@@ -57,6 +57,7 @@ const Sign = ({
         import.meta.env.VITE_BACK_END_URL + "/user/" + sign,
         json
       );
+      console.log(import.meta.env.VITE_BACK_END_URL);
 
       if ("_id" in response.data && "token" in response.data) {
         Cookies.set("userToken", response.data.token);
