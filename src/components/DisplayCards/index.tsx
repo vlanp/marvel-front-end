@@ -65,6 +65,8 @@ const DisplayCards = <
             ? "&" + finalEndpoint.endpoint1.specificQueryName + "=" + search
             : "");
 
+        console.log(url1);
+
         const url2 =
           finalEndpoint.endpoint2 &&
           params &&
