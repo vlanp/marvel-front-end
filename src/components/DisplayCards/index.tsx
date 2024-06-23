@@ -66,6 +66,7 @@ const DisplayCards = <
             : "");
 
         console.log(url1);
+        console.log(import.meta.env.VITE_BACK_END_URL);
 
         const url2 =
           finalEndpoint.endpoint2 &&
