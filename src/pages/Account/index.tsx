@@ -22,7 +22,8 @@ const Account = ({ userToken }: { userToken: string }) => {
       setErrorMessage("");
       try {
         const response = await axios.get(
-          import.meta.env.VITE_BACK_END_URL + "/user/account",
+          "https://site--back-end-marvel--x7c7hl9cnzx6.code.run" +
+            "/user/account",
           {
             headers: {
               Authorization: `Bearer ${userToken}`,
@@ -57,7 +58,8 @@ const Account = ({ userToken }: { userToken: string }) => {
       modifyAvatar && avatar && formData.append("avatar", avatar);
       modifyUsername && username && formData.append("username", username);
       const response = await axios.patch(
-        import.meta.env.VITE_BACK_END_URL + "/user/account",
+        "https://site--back-end-marvel--x7c7hl9cnzx6.code.run" +
+          "/user/account",
         formData,
         {
           headers: {

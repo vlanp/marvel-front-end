@@ -40,13 +40,17 @@ const Favorites = () => {
         if (cookiesIsArray && category === EEndpointName.CHARACTERS) {
           parsedFavoriteInCookies.forEach((favoriteId) => {
             const url =
-              import.meta.env.VITE_BACK_END_URL + "/character/" + favoriteId;
+              "https://site--back-end-marvel--x7c7hl9cnzx6.code.run" +
+              "/character/" +
+              favoriteId;
             arrayOfPromises.push(axios.get<IAboutACharacter>(url));
           });
         } else if (cookiesIsArray && category === EEndpointName.COMICS) {
           parsedFavoriteInCookies.forEach((favoriteId) => {
             const url =
-              import.meta.env.VITE_BACK_END_URL + "/comic/" + favoriteId;
+              "https://site--back-end-marvel--x7c7hl9cnzx6.code.run" +
+              "/comic/" +
+              favoriteId;
             arrayOfPromises.push(axios.get<IAboutAComic>(url));
           });
         }

@@ -56,7 +56,7 @@ const DisplayCards = <
     const fetchData = async () => {
       try {
         const url1 =
-          import.meta.env.VITE_BACK_END_URL +
+          "https://site--back-end-marvel--x7c7hl9cnzx6.code.run" +
           finalEndpoint.endpoint1.endpoint +
           (params ? params : "") +
           "?skip=" +
@@ -66,12 +66,12 @@ const DisplayCards = <
             : "");
 
         console.log(url1);
-        console.log(import.meta.env.VITE_BACK_END_URL);
+        console.log("https://site--back-end-marvel--x7c7hl9cnzx6.code.run");
 
         const url2 =
           finalEndpoint.endpoint2 &&
           params &&
-          import.meta.env.VITE_BACK_END_URL +
+          "https://site--back-end-marvel--x7c7hl9cnzx6.code.run" +
             finalEndpoint.endpoint2.endpoint +
             params;
 
