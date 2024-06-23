@@ -16,6 +16,7 @@ import IComicsWithCharacter from "../../interfaces/ComicsWithCharacter";
 import IAboutACharacter from "../../interfaces/AboutACharacter";
 import IAboutAComic from "../../interfaces/AboutAComic";
 import EPictureFormat from "../../enums/PictureFormat";
+import PageHandling from "../PageHandling";
 
 const DisplayCards = <
   T extends IComics | ICharacters | IComicsWithCharacter,
@@ -29,6 +30,8 @@ const DisplayCards = <
   const [data1, setData1] = useState<T>();
   const [data2, setData2] = useState<D>();
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [maxPage, setMaxPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const paramsKey =
     finalEndpoint.endpoint2 && finalEndpoint.endpoint2.params
@@ -49,9 +52,9 @@ const DisplayCards = <
         const url1 =
           import.meta.env.VITE_BACK_END_URL +
           finalEndpoint.endpoint1.endpoint +
-          (params ? params : "");
-        // console.log(url1);
-        // console.log(params);
+          (params ? params : "") +
+          "?skip=" +
+          100 * (currentPage - 1);
 
         const url2 =
           finalEndpoint.endpoint2 &&
@@ -59,7 +62,6 @@ const DisplayCards = <
           import.meta.env.VITE_BACK_END_URL +
             finalEndpoint.endpoint2.endpoint +
             params;
-        // console.log(url2);
 
         const arrayOfPromises: [
           Promise<AxiosResponse<T>>,
@@ -95,7 +97,9 @@ const DisplayCards = <
           console.log(data2);
           throw new Error(EError.UNKNOWN);
         }
-
+        if ("count" in data1) {
+          setMaxPage(Math.ceil(data1.count / 100));
+        }
         setData1(data1);
         setData2(data2);
         setIsLoading(false);
@@ -108,7 +112,7 @@ const DisplayCards = <
       }
     };
     fetchData();
-  }, [params, finalEndpoint]);
+  }, [params, finalEndpoint, currentPage]);
 
   return (
     <section className="display-cards-component">
@@ -173,6 +177,14 @@ const DisplayCards = <
                 }
               )}
           </section>
+          {maxPage > 1 && (
+            <PageHandling
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              maxPage={maxPage}
+              setIsLoading={setIsLoading}
+            />
+          )}
         </section>
       )}
     </section>
