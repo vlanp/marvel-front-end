@@ -43,7 +43,7 @@ const Sign = ({
     if (password.length === 0) {
       return alert("Le mot de passe est vide");
     }
-    if (username.length === 0) {
+    if (sign === ESign.SignUp && username.length === 0) {
       return alert("Le nom d'utilisateur est vide");
     }
     const json = {
@@ -61,7 +61,9 @@ const Sign = ({
       if ("_id" in response.data && "token" in response.data) {
         Cookies.set("userToken", response.data.token);
         setUserToken(response.data.token);
-        navigate("/user/account-validation", { state: { email } });
+        sign === ESign.SignUp
+          ? navigate("/user/account-validation", { state: { email } })
+          : navigate("/");
       } else {
         throw new Error(EError.UNKNOWN);
       }
@@ -74,6 +76,8 @@ const Sign = ({
           setErrorMessage(
             "Mot de passe non valide. Votre mot de passe doit contenir au moins 8 charatères avec au moins 1 minuscule, 1 majuscule, 1 chiffre et 1 symbol"
           );
+        } else if (error.response?.status === 404) {
+          setErrorMessage("Email et / ou mot de passe incorrect");
         }
       } else {
         setErrorMessage(EError.UNKNOWN);

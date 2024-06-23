@@ -1,0 +1,87 @@
+.my-account {
+  .loading-component,
+  .errorcomp-component {
+    height: calc(100vh - 80px);
+  }
+  min-height: calc(100vh - 7rem);
+  // background-color: $ligth-gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 50rem;
+    .account-profile-avatar {
+      position: relative;
+      .account-remove-avatar {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 2rem;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    > div {
+      display: flex;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 5px;
+      justify-content: space-between;
+      align-items: center;
+      input[type="file"] {
+        display: none;
+      }
+      .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+      > div {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        .account-modify-icon {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        .account-icon-red {
+          color: red;
+        }
+      }
+    }
+    img {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    button {
+      padding: 2rem 0;
+      color: white;
+      font-size: 2rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .my-account-error-message {
+    color: red;
+    background-color: white;
+    padding: 2rem;
+    text-align: center;
+  }
+}
+
+@media (width < 640px) {
+  .my-account {
+    form {
+      width: 35rem;
+    }
+  }
+}

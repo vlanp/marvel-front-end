@@ -1,9 +1,22 @@
 import "./header.scss";
 import logoMarvel from "./../../assets/img/logo-marvel.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import captainAmericaShield from "./../../assets/img/captain-america-shield.png";
+import Menu, { MenuItem } from "rc-menu";
+import { Dispatch, SetStateAction, useState } from "react";
+import Cookies from "js-cookie";
 
-const Header = () => {
+const Header = ({
+  userToken,
+  setUserToken,
+}: {
+  userToken: string;
+  setUserToken: Dispatch<SetStateAction<string | undefined>>;
+}) => {
+  const [accountMenu, setAccountMenu] = useState<boolean>(false);
+
+  const navigate = useNavigate();
+
   return (
     <header>
       <div>
@@ -19,10 +32,43 @@ const Header = () => {
           <h2>Explorer les Comics</h2>
         </Link>
       </nav>
-      <div>
-        <Link to={"/user/signup"} className="react-router-link">
-          <img src={captainAmericaShield} alt="captain america's shield" />
-        </Link>
+      <div className="header-component-account">
+        <img
+          src={captainAmericaShield}
+          alt="captain america's shield"
+          onClick={() => setAccountMenu(!accountMenu)}
+        />
+        {accountMenu && (
+          <Menu className="header-component-account-menu">
+            <MenuItem
+              className="header-component-account-menu-item"
+              onClick={() => {
+                setAccountMenu(false);
+                if (userToken) {
+                  navigate("/user/account");
+                } else {
+                  navigate("/user/signup");
+                }
+              }}
+            >
+              {userToken ? "Mon compte" : "M'inscrire"}
+            </MenuItem>
+            <MenuItem
+              className="header-component-account-menu-item"
+              onClick={() => {
+                setAccountMenu(false);
+                if (userToken) {
+                  Cookies.remove("userToken");
+                  setUserToken("");
+                } else {
+                  navigate("/user/signin");
+                }
+              }}
+            >
+              {userToken ? "Me déconnecter" : "Me connecter"}
+            </MenuItem>
+          </Menu>
+        )}
       </div>
     </header>
   );

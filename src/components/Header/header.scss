@@ -18,6 +18,7 @@ header {
     height: 60px;
     &:hover {
       opacity: 0.8;
+      cursor: pointer;
     }
   }
   h2 {
@@ -25,6 +26,30 @@ header {
     &:hover {
       color: orangered;
       transition: 0.2s;
+    }
+  }
+  .header-component-account {
+    position: relative;
+  }
+  .header-component-account-menu {
+    position: absolute;
+    top: 6.5rem;
+    left: -7rem;
+    width: 20rem;
+    height: 6rem;
+    background-color: rgba(0, 0, 255, 0.6);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+  }
+  .header-component-account-menu-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      cursor: pointer;
     }
   }
 }
