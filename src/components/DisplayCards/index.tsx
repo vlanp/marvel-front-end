@@ -17,6 +17,7 @@ import IAboutACharacter from "../../interfaces/AboutACharacter";
 import IAboutAComic from "../../interfaces/AboutAComic";
 import EPictureFormat from "../../enums/PictureFormat";
 import PageHandling from "../PageHandling";
+import SearchBar from "../SearchBar";
 
 const DisplayCards = <
   T extends IComics | ICharacters | IComicsWithCharacter,
@@ -32,6 +33,7 @@ const DisplayCards = <
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [maxPage, setMaxPage] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [search, setSearch] = useState<string>("");
 
   const paramsKey =
     finalEndpoint.endpoint2 && finalEndpoint.endpoint2.params
@@ -54,7 +56,12 @@ const DisplayCards = <
           finalEndpoint.endpoint1.endpoint +
           (params ? params : "") +
           "?skip=" +
-          100 * (currentPage - 1);
+          100 * (currentPage - 1) +
+          (search
+            ? "&" + finalEndpoint.endpoint1.specificQueryName + "=" + search
+            : "");
+
+        console.log(url1);
 
         const url2 =
           finalEndpoint.endpoint2 &&
@@ -62,6 +69,8 @@ const DisplayCards = <
           import.meta.env.VITE_BACK_END_URL +
             finalEndpoint.endpoint2.endpoint +
             params;
+
+        console.log(url2);
 
         const arrayOfPromises: [
           Promise<AxiosResponse<T>>,
@@ -78,7 +87,7 @@ const DisplayCards = <
 
         const data2 = responseList[1] && responseList[1].data;
 
-        if (!finalEndpoint.endpoint1.isData(data1)) {
+        if (!finalEndpoint.endpoint1.isData(data1) && !search) {
           console.log(data1);
           throw new Error(
             finalEndpoint.errorMessage +
@@ -112,7 +121,7 @@ const DisplayCards = <
       }
     };
     fetchData();
-  }, [params, finalEndpoint, currentPage]);
+  }, [params, finalEndpoint, currentPage, search]);
 
   return (
     <section className="display-cards-component">
@@ -147,6 +156,13 @@ const DisplayCards = <
                 handleClick={() => {}}
               />
             )}
+          </section>
+          <section className="display-cards-component-search-bar">
+            <SearchBar
+              search={search}
+              setSearch={setSearch}
+              placeholder={finalEndpoint.searchBarPlaceholder}
+            />
           </section>
           <section className="display-cards-component-cards">
             {data1 &&
