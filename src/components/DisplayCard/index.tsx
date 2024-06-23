@@ -32,7 +32,7 @@ const DisplayCard = ({
   });
 
   const favoriteInCookies = Cookies.get("favorite" + type);
-  let parsedFavoriteInCookies =
+  const parsedFavoriteInCookies =
     favoriteInCookies && JSON.parse(favoriteInCookies);
   const cookiesIsArray = Array.isArray(parsedFavoriteInCookies);
 
@@ -51,6 +51,10 @@ const DisplayCard = ({
   const [favoriteState, setFavoriteState] = useState<boolean>(isFavorite());
 
   const handleCookies = () => {
+    const favoriteInCookies = Cookies.get("favorite" + type);
+    let parsedFavoriteInCookies =
+      favoriteInCookies && JSON.parse(favoriteInCookies);
+    const cookiesIsArray = Array.isArray(parsedFavoriteInCookies);
     setFavoriteState(!favoriteState);
     if (favoriteState) {
       if (cookiesIsArray) {

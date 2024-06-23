@@ -81,43 +81,50 @@ const Favorites = () => {
     fetchData();
   }, [category]);
 
-  return isLoading ? (
-    <Loading />
-  ) : errorMessage ? (
-    <ErrorComp error={errorMessage} />
-  ) : (
+  return (
     <main className="favorites-page container">
-      <nav>
-        <h3
-          className={
-            category === EEndpointName.COMICS ? "favorites-page-selected" : ""
-          }
-          onClick={() => {
-            setCategory(EEndpointName.COMICS);
-          }}
-        >
-          Mes comics
-        </h3>
-        <h3
-          className={
-            category === EEndpointName.CHARACTERS
-              ? "favorites-page-selected"
-              : ""
-          }
-          onClick={() => setCategory(EEndpointName.CHARACTERS)}
-        >
-          Mes personnages
-        </h3>
-      </nav>
-      <DisplayCards
-        data={data}
-        filterFavorites={true}
-        finalEndpoint={
-          category === EEndpointName.CHARACTERS
-            ? EFinalEndpoint.CHARACTERS
-            : EFinalEndpoint.COMICS
-        }
-      />
+      {" "}
+      {isLoading ? (
+        <Loading />
+      ) : errorMessage ? (
+        <ErrorComp error={errorMessage} />
+      ) : (
+        <>
+          <nav>
+            <h3
+              className={
+                category === EEndpointName.COMICS
+                  ? "favorites-page-selected"
+                  : ""
+              }
+              onClick={() => {
+                setCategory(EEndpointName.COMICS);
+              }}
+            >
+              Mes comics
+            </h3>
+            <h3
+              className={
+                category === EEndpointName.CHARACTERS
+                  ? "favorites-page-selected"
+                  : ""
+              }
+              onClick={() => setCategory(EEndpointName.CHARACTERS)}
+            >
+              Mes personnages
+            </h3>
+          </nav>
+          <DisplayCards
+            data={data}
+            filterFavorites={true}
+            finalEndpoint={
+              category === EEndpointName.CHARACTERS
+                ? EFinalEndpoint.CHARACTERS
+                : EFinalEndpoint.COMICS
+            }
+          />
+        </>
+      )}
     </main>
   );
 };
