@@ -57,5 +57,6 @@ h3 {
 }
 
 main:not(.home-page) {
+  min-height: calc(100vh - 80px);
   background-image: url("./assets/img/star-sky.avif");
 }
