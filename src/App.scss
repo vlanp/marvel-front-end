@@ -32,10 +32,11 @@ h2 {
 }
 
 h3 {
+  margin-top: 2rem;
   font-family: "Cleanwork", sans-serif;
   font-size: 3rem;
   text-decoration: underline;
-  color: orangered;
+  color: white;
   text-align: center;
   line-height: 4rem;
 }
@@ -46,11 +47,15 @@ h3 {
   margin: 0 0;
 }
 
-// .error-message {
-//   color: orangered;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   font-size: 4rem;
-//   text-decoration: underline;
-// }
+.error-message {
+  color: orangered;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  text-decoration: underline;
+}
+
+main:not(.home-page) {
+  background-image: url("./assets/img/star-sky.avif");
+}

@@ -4,14 +4,14 @@ import "./validAddressEmail.scss";
 const ValidAddressEmail = () => {
   const { email } = useLocation().state;
   return (
-    <section className="valid-address-email">
+    <main className="valid-address-email">
       <div>
         <p>
           Merci de cliquer sur le lien que vous avez reçu sur la boite mail{" "}
           <span>{email}</span> afin d'activer votre compte.
         </p>
       </div>
-    </section>
+    </main>
   );
 };
 

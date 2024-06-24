@@ -29,15 +29,20 @@ header {
     }
   }
   .header-component-account {
-    position: relative;
+    display: flex;
+    justify-content: center;
+    > div {
+      position: relative;
+    }
   }
   .header-component-account-menu {
     position: absolute;
-    top: 6.5rem;
+    top: 8rem;
     left: -7rem;
     width: 20rem;
     height: 6rem;
-    background-color: rgba(0, 0, 255, 0.6);
+    background-color: #717171;
+    border: 1px solid black;
     color: white;
     display: flex;
     flex-direction: column;
@@ -50,6 +55,7 @@ header {
     justify-content: center;
     &:hover {
       cursor: pointer;
+      opacity: 0.8;
     }
   }
 }

@@ -3,10 +3,12 @@ import EFinalEndpoint from "../../enums/Endpoints";
 
 const CharactersWithinComic = () => {
   return (
-    <DisplayCards
-      finalEndpoint={EFinalEndpoint.CHARACTERS_WITHIN_COMIC}
-      filterFavorites={false}
-    />
+    <main>
+      <DisplayCards
+        finalEndpoint={EFinalEndpoint.CHARACTERS_WITHIN_COMIC}
+        filterFavorites={false}
+      />
+    </main>
   );
 };
 

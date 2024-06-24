@@ -4,7 +4,6 @@
     height: calc(100vh - 80px);
   }
   min-height: calc(100vh - 7rem);
-  // background-color: $ligth-gray;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,6 +47,7 @@
         .account-modify-icon {
           &:hover {
             cursor: pointer;
+            color: orangered;
           }
         }
         .account-icon-red {
@@ -65,8 +65,14 @@
       padding: 2rem 0;
       color: white;
       font-size: 2rem;
+      border: none;
+      background-color: white;
+      color: black;
+      border-radius: 5px;
       &:hover {
         cursor: pointer;
+        color: orangered;
+        transition: 0.2s;
       }
     }
   }

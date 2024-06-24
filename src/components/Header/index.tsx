@@ -36,42 +36,45 @@ const Header = ({
         </Link>
       </nav>
       <div className="header-component-account">
-        <img
-          src={captainAmericaShield}
-          alt="captain america's shield"
-          onClick={() => setAccountMenu(!accountMenu)}
-        />
-        {accountMenu && (
-          <Menu className="header-component-account-menu">
-            <MenuItem
-              className="header-component-account-menu-item"
-              onClick={() => {
-                setAccountMenu(false);
-                if (userToken) {
-                  navigate("/user/account");
-                } else {
-                  navigate("/user/signup");
-                }
-              }}
-            >
-              {userToken ? "Mon compte" : "M'inscrire"}
-            </MenuItem>
-            <MenuItem
-              className="header-component-account-menu-item"
-              onClick={() => {
-                setAccountMenu(false);
-                if (userToken) {
-                  Cookies.remove("userToken");
-                  setUserToken("");
-                } else {
-                  navigate("/user/signin");
-                }
-              }}
-            >
-              {userToken ? "Me déconnecter" : "Me connecter"}
-            </MenuItem>
-          </Menu>
-        )}
+        <div>
+          <img
+            src={captainAmericaShield}
+            alt="captain america's shield"
+            onClick={() => setAccountMenu(!accountMenu)}
+          />
+          {accountMenu && (
+            <Menu className="header-component-account-menu">
+              <MenuItem
+                className="header-component-account-menu-item"
+                onClick={() => {
+                  setAccountMenu(false);
+                  if (userToken) {
+                    navigate("/user/account");
+                  } else {
+                    navigate("/user/signup");
+                  }
+                }}
+              >
+                {userToken ? "Mon compte" : "M'inscrire"}
+              </MenuItem>
+              <MenuItem
+                className="header-component-account-menu-item"
+                onClick={() => {
+                  setAccountMenu(false);
+                  if (userToken) {
+                    Cookies.remove("userToken");
+                    navigate("/");
+                    setUserToken("");
+                  } else {
+                    navigate("/user/signin");
+                  }
+                }}
+              >
+                {userToken ? "Me déconnecter" : "Me connecter"}
+              </MenuItem>
+            </Menu>
+          )}
+        </div>
       </div>
     </header>
   );

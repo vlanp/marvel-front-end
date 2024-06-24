@@ -5,7 +5,10 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: purple;
+  color: white;
+  .sign-up-error-message {
+    color: red;
+  }
   form {
     display: flex;
     flex-direction: column;

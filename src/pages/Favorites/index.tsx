@@ -25,6 +25,7 @@ const Favorites = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       try {
         const favoriteInCookies = Cookies.get("favorite" + category);
@@ -82,49 +83,48 @@ const Favorites = () => {
   }, [category]);
 
   return (
-    <main className="favorites-page container">
-      {" "}
-      {isLoading ? (
-        <Loading />
-      ) : errorMessage ? (
-        <ErrorComp error={errorMessage} />
-      ) : (
-        <>
-          <nav>
-            <h3
-              className={
-                category === EEndpointName.COMICS
-                  ? "favorites-page-selected"
-                  : ""
-              }
-              onClick={() => {
-                setCategory(EEndpointName.COMICS);
-              }}
-            >
-              Mes comics
-            </h3>
-            <h3
-              className={
-                category === EEndpointName.CHARACTERS
-                  ? "favorites-page-selected"
-                  : ""
-              }
-              onClick={() => setCategory(EEndpointName.CHARACTERS)}
-            >
-              Mes personnages
-            </h3>
-          </nav>
-          <DisplayCards
-            data={data}
-            filterFavorites={true}
-            finalEndpoint={
-              category === EEndpointName.CHARACTERS
-                ? EFinalEndpoint.CHARACTERS
-                : EFinalEndpoint.COMICS
+    <main>
+      <section className="favorites-page container">
+        <nav>
+          <h3
+            className={
+              category === EEndpointName.COMICS ? "favorites-page-selected" : ""
             }
-          />
-        </>
-      )}
+            onClick={() => {
+              setCategory(EEndpointName.COMICS);
+            }}
+          >
+            Mes comics
+          </h3>
+          <h3
+            className={
+              category === EEndpointName.CHARACTERS
+                ? "favorites-page-selected"
+                : ""
+            }
+            onClick={() => setCategory(EEndpointName.CHARACTERS)}
+          >
+            Mes personnages
+          </h3>
+        </nav>
+        {isLoading ? (
+          <Loading />
+        ) : errorMessage ? (
+          <ErrorComp error={errorMessage} />
+        ) : (
+          <>
+            <DisplayCards
+              data={data}
+              filterFavorites={true}
+              finalEndpoint={
+                category === EEndpointName.CHARACTERS
+                  ? EFinalEndpoint.CHARACTERS
+                  : EFinalEndpoint.COMICS
+              }
+            />
+          </>
+        )}
+      </section>
     </main>
   );
 };
